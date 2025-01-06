@@ -11,6 +11,17 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+     
+      animation: {
+        bounce: "bounce 1s infinite",
+        pulse: "pulse 1s infinite",
+      },
+      transformOrigin: {
+        center: "center",
+      },
+      transitionProperty: {
+        transform: "transform",
+      },
     },
   },
   plugins: [],
