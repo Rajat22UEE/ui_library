@@ -1,24 +1,13 @@
-"use client"; 
-
-
-import Footer from "./components/layout/Footer";
-// import Layout from "./components/layout/Layout";
-import Navbar from "./components/layout/Navbar";
-import Sidebar from "./components/layout/Sidebar";
-import ButtonDetails from "./Pages/components/ButtonDetails";
-
-
 
 export default function Home() {
   return (
-    <div className="flex flex-col min-h-screen bg-[#0a0909] text-white">
-      <Navbar />
-      <div className="flex flex-1 p-[1rem] gap-2">
-        <Sidebar />
-        <ButtonDetails/>
-        {/* <Layout /> */}
+
+    <div className="flex-1 p-4 text-white ">
+      <div className="p-4">
+        <h1 className="text-2xl font-bold">Welcome to the Component Library</h1>
+        <p className="mt-2 text-gray-400">Select a component from the sidebar to see details.</p>
+       
       </div>
-      <Footer />
     </div>
   );
 }

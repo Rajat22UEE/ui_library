@@ -1,5 +1,7 @@
 import React from "react";
-import Button from "../../components/ui/Button";
+import Link from 'next/link';
+import { FaCode } from "react-icons/fa";
+import Button from "../../../components/ui/Button";
 
 const buttonData = [
   {
@@ -58,14 +60,14 @@ const buttonData = [
       { variant: "Animated18", text: "Hover" },
       { variant: "Animated19", text: "Hover Me" },
       { variant: "Animated20", text: "Hover Me" },
-      
+
     ],
   },
 ];
 
 export default function ButtonDetails() {
   return (
-    <div className="flex-1 p-4 bg-[#0a0909] text-white rounded-lg border border-[#27272A] overflow-y-auto max-h-[calc(120vh-full)]">
+    <div className="flex-1 p-4 ">
       <main className="ml-4">
         {buttonData.map((section, index) => (
           <section className="mb-8" key={index}>
@@ -74,16 +76,31 @@ export default function ButtonDetails() {
               {section.buttons.map((button, buttonIdx) => (
                 <div
                   key={buttonIdx}
-                  className="bg-[#111111] border border-[#27272A] rounded p-4 flex items-center justify-center h-72"
+                  className="bg-[#111111] border border-[#27272A] rounded p-4 h-80 group relative"
                 >
-                  <Button
-                    variant={button.variant}
-                    size={button.size}
-                    isDisabled={button.isDisabled}
-                  >
-                    {button.text}
-                  </Button>
+                  <div className="flex items-center justify-center h-60">
+                    <Button
+                      variant={button.variant}
+                      size={button.size}
+                      isDisabled={button.isDisabled}
+                    >
+                      {button.text}
+                    </Button>
+                  </div>
+                  <div className="flex justify-end w-full">
+                    <Link href={{
+                      pathname: "../getCode/CodeButton",
+                      query: { variant: button.variant, text: button.text },
+                    }}
+                     passHref>
+                      <div className=" flex items-center px-3 py-2 w-32 bg-[#111111] text-white text-md rounded-lg cursor-pointer hover:bg-[#0a0909] transition-opacity duration-500 opacity-0 group-hover:opacity-100">
+                        <FaCode className="mr-2" size={20} />
+                        <span className="font-medium">Get Code</span>
+                      </div>
+                    </Link>
+                  </div>
                 </div>
+
               ))}
             </div>
           </section>
