@@ -13,7 +13,7 @@ function CopyButton({ appliedVariant, text }) {
 
   const handleCopy = () => {
     navigator.clipboard.writeText(
-      `<button className="${appliedVariant}">${text}</button>`
+      `<button class="${appliedVariant}">${text}</button>`
     );
     setCopied(true);
     setTimeout(() => setCopied(false), 2000); 
@@ -64,7 +64,7 @@ export default function CodeButton() {
               <span className="text-blue-400">{"<"}</span>
               <span className="text-blue-500">button</span>
               <span className="text-blue-400">{" "}</span>
-              <span className="text-purple-400">className</span>
+              <span className="text-purple-400">class</span>
               <span className="text-blue-400">{"=\""}</span>
               <span className="text-orange-400">{appliedVariant}</span>
               <span className="text-blue-400">{"\">"}</span>
