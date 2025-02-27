@@ -19,7 +19,7 @@ export async function downloadComponent(component) {
   // Fetch the component from GitHub
   https.get(url, (res) => {
     if (res.statusCode !== 200) {
-      console.error(`❌ Component "${component}" not found.`);
+      console.error(`❌ Component "${component}" not found. (HTTP ${res.statusCode})`);
       return;
     }
 
@@ -27,10 +27,15 @@ export async function downloadComponent(component) {
     res.pipe(file);
 
     file.on("finish", () => {
-      file.close();
-      console.log(`✅ Successfully added ${component}.jsx to components/ui/`);
+      file.close(() => {
+        console.log(`✅ Successfully added ${component}.jsx to components/ui/`);
+      });
     });
+
   }).on("error", (err) => {
     console.error(`❌ Error fetching component: ${err.message}`);
+    if (fs.existsSync(filePath)) {
+      fs.unlinkSync(filePath); // Remove the file if download failed
+    }
   });
 }
