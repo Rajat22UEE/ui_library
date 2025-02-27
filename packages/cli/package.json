@@ -1,0 +1,12 @@
+{
+    "name": "yupcha-cli",
+    "version": "1.0.0",
+    "description": "CLI tool for fetching yupcha-ui components",
+    "bin": {
+      "yupcha-cli": "bin/index.js"
+    },
+    "dependencies": {
+      "commander": "^10.0.0"
+    }
+  }
+  
