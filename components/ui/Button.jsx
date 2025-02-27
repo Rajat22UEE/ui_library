@@ -2,12 +2,12 @@ import React from "react";
 import classNames from "classnames";
 
 export const variantStyles = {
-        default: "bg-blue-600 rounded-md text-white shadow-md h-10 w-24",
-        destructive: "bg-red-600 text-white rounded-md shadow-sm hover:bg-red-500 h-10 w-24",
-        outline: "border border-gray-600 bg-transparent rounded-md text-white hover:bg-gray-700 h-10 w-20",
-        secondary: "bg-gray-700 text-white shadow-sm rounded-md hover:bg-gray-600 h-10 w-24",
-        ghost: "text-gray-300 hover:bg-gray-700 rounded-md hover:text-white h-10 w-24",
-        link: "text-blue-400 underline-offset-4 rounded-md hover:underline h-10 w-32",
+        Default: "bg-blue-600 rounded-md text-white shadow-md h-10 w-24",
+        Destructive: "bg-red-600 text-white rounded-md shadow-sm hover:bg-red-500 h-10 w-24",
+        Outline: "border border-gray-600 bg-transparent rounded-md text-white hover:bg-gray-700 h-10 w-20",
+        Secondary: "bg-gray-700 text-white shadow-sm rounded-md hover:bg-gray-600 h-10 w-24",
+        Ghost: "text-gray-300 hover:bg-gray-700 rounded-md hover:text-white h-10 w-24",
+        Link: "text-blue-400 underline-offset-4 rounded-md hover:underline h-10 w-32",
 };
 
 const Button = ({

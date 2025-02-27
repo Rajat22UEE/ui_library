@@ -1,65 +1,100 @@
-import React from "react";
-import Link from 'next/link';
-import { FaCode } from "react-icons/fa";
-import Button from "../../../components/ui/Button";
+"use client";
+
+import React, { useState } from "react";
+import { TiTick } from "react-icons/ti";
+import { FaRegCopy } from "react-icons/fa6";
+import Button, { variantStyles } from "../../../components/ui/Button";
 
 const buttonData = [
-  {
-    type: "Static",
-    buttons: [
-      { variant: "default", text: "Submit" },
-      { variant: "destructive", text: "Sign-up" },
-      { variant: "outline", text: "Save" },
-
-      { variant: "secondary", text: "Cancel" },
-      { variant: "ghost", text: "Button" },
-      { variant: "link", text: "Read More.." },
-    ],
-  },
-  
+  { variant: "Default", text: "Button" },
+  { variant: "Destructive", text: "Destructive" },
+  { variant: "Outline", text: "Outline" },
+  { variant: "Secondary", text: "Secondary" },
+  { variant: "Ghost", text: "Ghost" },
+  { variant: "Link", text: "Link.." },
 ];
 
-export default function ButtonDetails() {
+function CopyButton({ appliedVariant, text }) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = () => {
+    const code = `<button class="${appliedVariant}">${text}</button>`;
+    navigator.clipboard.writeText(code);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
   return (
-    <div className="flex-1 p-4 ">
-      <main className="ml-4">
-        {buttonData.map((section, index) => (
-          <section className="mb-8" key={index}>
-            <h2 className="text-lg font-semibold mb-4">{section.type} Buttons</h2>
-            <div className="grid grid-cols-3 gap-4">
-              {section.buttons.map((button, buttonIdx) => (
-                <div
-                  key={buttonIdx}
-                  className="bg-[#111111] border border-[#27272A] rounded p-4 h-80 group relative"
-                >
-                  <div className="flex items-center justify-center h-60">
-                    <Button
-                      variant={button.variant}
-                      size={button.size}
-                      isDisabled={button.isDisabled}
-                    >
-                      {button.text}
-                    </Button>
+    <button
+      className="flex items-center bg-gray-200 hover:bg-gray-300 border text-black border-gray-300 rounded-md px-3 py-1"
+      onClick={handleCopy}
+    >
+      {copied ? (
+        <TiTick className="text-green-500 text-lg" />
+      ) : (
+        <FaRegCopy className="text-black text-lg" />
+      )}
+      <span className="ml-2">{copied ? "Copied!" : "Copy"}</span>
+    </button>
+  );
+}
+
+export default function ButtonsShowcase() {
+  return (
+    <div className="p-5">
+      <div className="text-3xl text-white font-bold mb-8">Button Showcase</div>
+
+      <div className="space-y-10">
+        {buttonData.map((button, index) => {
+          const appliedVariant = variantStyles[button.variant] || variantStyles.default;
+          return (
+            <div key={index} className="flex flex-col space-y-3">
+              
+              <div className="text-2xl font-bold text-white">{button.variant} Button</div>
+
+              <div className="bg-[#111111] border border-[#27272A] rounded-xl p-8 shadow-lg min-h-[250px] flex flex-col">
+                
+                <div className="grid grid-cols-2 gap-6">
+                  
+                  <div className="flex flex-col justify-between space-y-2">
+
+                    <div className="text-md font-semibold text-gray-400">Preview</div>
+
+                    <div className="flex justify-center items-center h-64  rounded-lg p-4">
+                      <Button variant={button.variant}>{button.text}</Button>
+                    </div>
                   </div>
-                  <div className="flex justify-end w-full">
-                    <Link href={{
-                      pathname: "../getCode/CodeButton",
-                      query: { variant: button.variant, text: button.text },
-                    }}
-                     passHref>
-                      <div className=" flex items-center px-3 py-2 w-32 bg-[#111111] text-white text-md rounded-lg cursor-pointer hover:bg-[#0a0909] transition-opacity duration-500 opacity-0 group-hover:opacity-100">
-                        <FaCode className="mr-2" size={20} />
-                        <span className="font-medium">Get Code</span>
-                      </div>
-                    </Link>
+
+                  <div className="flex flex-col space-y-4">
+                    
+                    <div className="flex justify-between items-center">
+                      
+                      <div className="text-md font-semibold text-gray-400">Code</div>
+                      <CopyButton appliedVariant={appliedVariant} text={button.text} />
+                    </div>
+
+                    <div className="bg-[#0a0909] text-white p-4 rounded-md font-mono text-sm shadow-md h-64 ">
+                      <span className="text-blue-400">{"<"}</span>
+                      <span className="text-blue-500">button</span>
+                      <span className="text-blue-400">{" "}</span>
+                      <span className="text-purple-400">class</span>
+                      <span className="text-blue-400">{"=\""}</span>
+                      <span className="text-orange-400">{appliedVariant}</span>
+                      <span className="text-blue-400">{"\">"}</span>
+                      <span className="text-green-400">{button.text}</span>
+                      <span className="text-blue-400">{"</"}</span>
+                      <span className="text-blue-500">button</span>
+                      <span className="text-blue-400">{">"}</span>
+                    </div>
+
                   </div>
                 </div>
 
-              ))}
+              </div>
             </div>
-          </section>
-        ))}
-      </main>
+          );
+        })}
+      </div>
     </div>
   );
 }
